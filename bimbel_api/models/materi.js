@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const materiSchema = new mongoose.Schema({
-    nama: {
+    namaMateri: {
         type: String,
         required: true,
         trim: true,
@@ -11,9 +11,9 @@ const materiSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    pengajar:{
+    guru:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "guru",
     },
 
     createdAt: {

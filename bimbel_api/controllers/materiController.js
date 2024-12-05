@@ -23,9 +23,9 @@ const getMateriById = async (req, res) => {
 
 const createMateri = async (req, res) => {
     const materi = new Materi({
-        nama: req.body.nama,
+        namaMateri: req.body.namaMateri,
         deskripsi: req.body.deskripsi,
-        pengajar: req.body.pengajar,
+        guru: req.body.guru,
     })
     try {
         const newMateri = await materi.save();
@@ -43,15 +43,15 @@ const updateMateri = async (req, res) => {
         if (!materi)
             return res.status(404).json({ message: "Materi not found" });
 
-        if (req.body.nama != null){
-            materi.nama = req.body.nama;
+        if (req.body.namaMateri != null){
+            materi.namaMateri = req.body.namaMateri;
         }
 
         if (req.body.deskripsi != null){
             materi.deskripsi = req.body.deskripsi;
         }
-        if (req.body.pengajar != null){
-            materi.pengajar = req.body.pengajar;
+        if (req.body.guru != null){
+            materi.guru = req.body.guru;
         }
 
         const updateMateri = await materi.save();

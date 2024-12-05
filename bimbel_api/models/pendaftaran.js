@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 
 const pendaftaranSchema = new mongoose.Schema(
     {
-        siswa: {
+        murid: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Siswa",
+            ref: "murid",
             required: true,
         },
         kelas: {

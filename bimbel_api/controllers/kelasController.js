@@ -23,11 +23,8 @@ const getKelasById = async (req, res) => {
 
 const createKelas = async (req, res) => {
     const kelas = new Kelas({
-        nama: req.body.nama,
-        deskripsi: req.body.deskripsi,
-        pengajar: req.body.pengajar,
-        siswa:req.body.siswa,
-        materi:req.body.materi,
+        namaKelas: req.body.namaKelas,
+        tingkat: req.body.tingkat,
     })
     try {
         const newKelas = await kelas.save();
@@ -45,22 +42,13 @@ const updateKelas = async (req, res) => {
         if (!kelas)
             return res.status(404).json({ message: "Kelas not found" });
 
-        if (req.body.nama != null){
-            kelas.nama = req.body.nama;
+        if (req.body.namaKelas != null){
+            kelas.namaKelas = req.body.namaKelas;
         }
 
         
-        if (req.body.deskripsi != null){
-            kelas.deskripsi = req.body.deskripsi;
-        }
-        if (req.body.pengajar != null){
-            kelas.pengajar = req.body.pengajar;
-        }
-        if (req.body.siswa != null){
-            kelas.siswa = req.body.siswa;
-        }
-        if (req.body.materi != null){
-            kelas.materi = req.body.materi;
+        if (req.body.tingkat != null){
+            kelas.tingkat = req.body.tingkat;
         }
 
         const updateKelas = await kelas.save();

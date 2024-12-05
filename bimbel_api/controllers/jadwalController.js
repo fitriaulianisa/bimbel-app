@@ -1,7 +1,7 @@
 const Jadwal = require("../models/jadwal");
 const getAllJadwal = async (req, res) => {
     try {
-        const jadwal = await Jadwal.find().populate('kelas').populate('pengajar');
+        const jadwal = await Jadwal.find().populate('kelas').populate('guru');
 
         res.status(200).json(jadwal);
     } catch (err) {
@@ -28,7 +28,7 @@ const getJadwalById = async (req, res) => {
 const createJadwal = async (req, res) => {
     const jadwal = new Jadwal({
         kelas: req.body.kelas,
-        pengajar: req.body.pengajar,
+        guru: req.body.guru,
         waktuMulai: req.body.waktuMulai,
         waktuSelesai:req.body.waktuSelesai,
         topik:req.body.topik
@@ -54,8 +54,8 @@ const updateJadwal = async (req, res) => {
         }
 
         
-        if (req.body.pengajar != null){
-            jadwal.pengajar = req.body.pengajar;
+        if (req.body.guru != null){
+            jadwal.guru = req.body.guru;
         }
         if (req.body.waktuMulai != null){
             jadwal.waktuMulai = req.body.waktuMulai;

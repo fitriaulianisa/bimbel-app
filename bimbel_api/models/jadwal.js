@@ -7,9 +7,9 @@ const jadwalSchema = new mongoose.Schema({
         required: true,
         
     },
-    pengajar: {
+    guru: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "guru",
         required: true,
         
     },

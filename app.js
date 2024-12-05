@@ -19,6 +19,7 @@ const jadwalRouterApi = require('./bimbel_api/routes/jadwal');
 const kelasRouterApi = require('./bimbel_api/routes/kelas');
 const muridRouterApi = require('./bimbel_api/routes/murid');
 const pendaftaranRouterApi = require('./bimbel_api/routes/pendaftaran');
+const guruRouterApi = require('./bimbel_api/routes/guru');
 
 const authRouterApi = require("./bimbel_api/routes/auth");
 
@@ -43,6 +44,7 @@ app.use('/api/jadwal', jadwalRouterApi);
 app.use('/api/kelas', kelasRouterApi);
 app.use('/api/murid', muridRouterApi);
 app.use('/api/pendaftaran', pendaftaranRouterApi);
+app.use('/api/guru', guruRouterApi);
 
 app.use('/api/auth', authRouterApi);
 

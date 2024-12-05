@@ -23,7 +23,7 @@ const getPendaftaranById = async (req, res) => {
 
 const createPendaftaran = async (req, res) => {
     const pendaftaran = new Pendaftaran({
-        siswa: req.body.siswa,
+        murid: req.body.murid,
         kelas: req.body.kelas,
         status: req.body.status,
         tglPendaftaran: req.body.tglPendaftaran,
