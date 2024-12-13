@@ -1,19 +1,20 @@
 const mongoose = require("mongoose");
 
-const materiSchema = new mongoose.Schema({
-    namaMateri: {
+const jenisbimbelSchema = new mongoose.Schema({
+    nama: {
         type: String,
         required: true,
         trim: true,
     },
-    deskripsi: {
+    singkatan: {
         type: String,
         required: true,
         trim: true,
     },
-    guru:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "guru",
+    harga:{
+        type: String,
+        required: true,
+        trim: true,
     },
 
     createdAt: {
@@ -22,6 +23,6 @@ const materiSchema = new mongoose.Schema({
     },
 });
 
-const Materi = mongoose.model("Materi", materiSchema);
+const JenisBimbel = mongoose.model("Jenis Bimbel", jenisbimbelSchema);
 
-module.exports = Materi;
+module.exports = JenisBimbel;

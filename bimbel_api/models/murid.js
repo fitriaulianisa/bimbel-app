@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const JenisBimbel = require("./jenisBimbel");
 
 const muridSchema = new mongoose.Schema({
     nama: {
@@ -7,10 +8,12 @@ const muridSchema = new mongoose.Schema({
         unique: true,
         trim: true,
     },
-    email: {
+    alamat:{
         type: String,
-        required: true,
-        unique: true,
+        trim: true,
+    },
+    kelas:{
+        type: String,
         trim: true,
     },
     no_hp:{
@@ -18,16 +21,19 @@ const muridSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    alamat:{
+    no_hpOrtu:{
         type: String,
+        required: true,
         trim: true,
     },
-    tglLahir:{
-        type: Date,
+    asal_sekolah:{
+        type: String,
+        required: true,
+        trim: true,
     },
-    kelas: {
+    JenisBimbel: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "kelas",
+        ref: "Jenis Bimbel",
     },
 
     createdAt: {

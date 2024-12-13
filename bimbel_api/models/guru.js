@@ -7,10 +7,8 @@ const guruSchema = new mongoose.Schema({
         unique: true,
         trim: true,
     },
-    email: {
+    alamat:{
         type: String,
-        required: true,
-        unique: true,
         trim: true,
     },
     no_hp:{
@@ -18,16 +16,10 @@ const guruSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    alamat:{
-        type: String,
-        trim: true,
-    },
-    tglLahir:{
-        type: Date,
-    },
-    kelas: {
+    
+    jenisbimbel: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "kelas",
+        ref: "jenis bimbel",
     },
 
     createdAt: {

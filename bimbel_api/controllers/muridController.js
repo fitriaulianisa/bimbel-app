@@ -24,11 +24,12 @@ const getMuridById = async (req, res) => {
 const createMurid = async (req, res) => {
     const murid = new Murid({
         nama: req.body.nama,
-        email: req.body.email,
-        no_hp: req.body.no_hp,
         alamat: req.body.alamat,
-        tglLahir: req.body.tglLahir,
         kelas: req.body.kelas,
+        no_hp: req.body.no_hp,
+        no_hpOrtu: req.body.no_hpOrtu,
+        asal_sekolah: req.body.asal_sekolah,
+        jenisbimbel: req.body.jenisbimbel
     })
     try {
         const newMurid = await murid.save();

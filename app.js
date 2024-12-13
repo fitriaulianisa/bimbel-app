@@ -14,11 +14,10 @@ const app = express();
 // Rute
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const materiRouterApi = require('./bimbel_api/routes/materi');
+const jenisbimbelRouterApi = require('./bimbel_api/routes/jenisBimbel');
 const jadwalRouterApi = require('./bimbel_api/routes/jadwal');
-const kelasRouterApi = require('./bimbel_api/routes/kelas');
+const userRouterApi = require('./bimbel_api/routes/user');
 const muridRouterApi = require('./bimbel_api/routes/murid');
-const pendaftaranRouterApi = require('./bimbel_api/routes/pendaftaran');
 const guruRouterApi = require('./bimbel_api/routes/guru');
 
 const authRouterApi = require("./bimbel_api/routes/auth");
@@ -39,11 +38,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routing
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/api/materi', materiRouterApi);
+app.use('/api/jenisBimbel', jenisbimbelRouterApi);
 app.use('/api/jadwal', jadwalRouterApi);
-app.use('/api/kelas', kelasRouterApi);
+app.use('/api/user', userRouterApi);
 app.use('/api/murid', muridRouterApi);
-app.use('/api/pendaftaran', pendaftaranRouterApi);
 app.use('/api/guru', guruRouterApi);
 
 app.use('/api/auth', authRouterApi);

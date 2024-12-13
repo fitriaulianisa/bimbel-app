@@ -24,11 +24,10 @@ const getGuruById = async (req, res) => {
 const createGuru = async (req, res) => {
     const guru = new Guru({
         nama: req.body.nama,
-        email: req.body.email,
-        no_hp: req.body.no_hp,
         alamat: req.body.alamat,
-        tglLahir: req.body.tglLahir,
-        kelas: req.body.kelas,
+        no_hp: req.body.no_hp,
+        jenisbimbel: req.body.jenisbimbel,
+        
     })
     try {
         const newGuru = await guru.save();
@@ -49,21 +48,14 @@ const updateGuru = async (req, res) => {
         if (req.body.nama != null){
             guru.nama = req.body.nama;
         }
-
-        if (req.body.email != null){
-            guru.email = req.body.email;
+        if (req.body.alamat != null){
+            guru.alamat = req.body.alamat;
         }
         if (req.body.no_hp != null){
             guru.no_hp = req.body.no_hp;
         }
-        if (req.body.alamat != null){
-            guru.alamat = req.body.alamat;
-        }
-        if (req.body.tglLahir != null){
-            guru.tglLahir = req.body.tglLahir;
-        }
-        if (req.body.kelas != null){
-            guru.kelas = req.body.kelas;
+        if (req.body.jenisbimbel != null){
+            guru.jenisbimbel = req.body.jenisbimbel;
         }
 
         const updateGuru = await guru.save();

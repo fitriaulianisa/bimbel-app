@@ -27,11 +27,11 @@ const getJadwalById = async (req, res) => {
 
 const createJadwal = async (req, res) => {
     const jadwal = new Jadwal({
-        kelas: req.body.kelas,
-        guru: req.body.guru,
-        waktuMulai: req.body.waktuMulai,
-        waktuSelesai:req.body.waktuSelesai,
-        topik:req.body.topik
+        hari: req.body.hari,
+        jam: req.body.jam,
+        jenisbimbel: req.body.jenisbimbel,
+        ruangKelas:req.body.ruangKelas,
+        guru:req.body.guru
     })
     try {
         const newJadwal = await jadwal.save();
@@ -49,22 +49,22 @@ const updateJadwal = async (req, res) => {
         if (!jadwal)
             return res.status(404).json({ message: "Jadwal not found" });
 
-        if (req.body.kelas != null){
-            jadwal.kelas = req.body.kelas;
+        if (req.body.hari != null){
+            jadwal.hari = req.body.hari;
         }
 
         
+        if (req.body.jam != null){
+            jadwal.jam = req.body.jam;
+        }
+        if (req.body.jenisbimbel != null){
+            jadwal.jenisbimbel = req.body.jenisbimbel;
+        }
+        if (req.body.ruangKelas != null){
+            jadwal.ruangKelas = req.body.ruangKelas;
+        }
         if (req.body.guru != null){
             jadwal.guru = req.body.guru;
-        }
-        if (req.body.waktuMulai != null){
-            jadwal.waktuMulai = req.body.waktuMulai;
-        }
-        if (req.body.waktuSelesai != null){
-            jadwal.waktuSelesai = req.body.waktuSelesai;
-        }
-        if (req.body.topik != null){
-            jadwal.topik = req.body.topik;
         }
 
         const updateJadwal = await jadwal.save();
