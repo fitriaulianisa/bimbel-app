@@ -15,10 +15,9 @@ const muridController = require("../controllers/muridController");
 // router.delete("/:id", authMiddleware, roleMiddleware("admin"),muridController.deleteMurid);
 
 
-router.get("/", jadwalController.getAllJadwal);
-router.post("/", jadwalController.createJadwal);
-router.get("/:id", jadwalController.getJadwalById);
-router.put("/:id", jadwalController.updateJadwal);
-router.delete("/:id", jadwalController.deleteJadwal);
-
+router.get("/", muridController.getAllMurid);
+router.post("/", muridController.createMurid);
+router.get("/:id", muridController.getMuridById);
+router.put("/:id", muridController.updateMurid);
+router.delete("/:id", muridController.deleteMurid);
 module.exports = router;
