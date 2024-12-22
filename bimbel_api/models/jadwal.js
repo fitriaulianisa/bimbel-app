@@ -11,18 +11,20 @@ const jadwalSchema = new mongoose.Schema({
         required: true,
         
     },
-    jenisbimbel: {
+    jenisbimbel_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "jenisbimbel",
+        ref: "JenisBimbel",
+        required: true,
     },
     ruangkelas:{
         type: String,
         required: true,
         
     },
-    guru:{
+    guru_id:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "guru",
+        ref: "Guru",
+        required: true,
         
     },
 

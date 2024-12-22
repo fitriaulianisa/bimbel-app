@@ -29,9 +29,10 @@ const muridSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    jenisbimbel: {
+    jenisbimbel_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "jenisbimbel",
+        ref: "JenisBimbel",
+        required: true,
     },
 
     createdAt: {

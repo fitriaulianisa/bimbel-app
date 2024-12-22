@@ -17,9 +17,10 @@ const guruSchema = new mongoose.Schema({
         trim: true,
     },
     
-    jenisbimbel: {
+    jenisbimbel_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "jenisbimbel",
+        ref: "JenisBimbel",
+        required: true,
     },
 
     createdAt: {
