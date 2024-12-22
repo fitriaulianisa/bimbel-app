@@ -23,6 +23,6 @@ const jenisbimbelSchema = new mongoose.Schema({
     },
 });
 
-const JenisBimbel = mongoose.model("Jenis Bimbel", jenisbimbelSchema);
+const JenisBimbel = mongoose.model("JenisBimbel", jenisbimbelSchema);
 
 module.exports = JenisBimbel;

@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-const JenisBimbel = require("./jenisBimbel");
-
 const muridSchema = new mongoose.Schema({
     nama: {
         type: String,
@@ -31,9 +29,9 @@ const muridSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    jenisBimbel: {
+    jenisbimbel: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "JenisBimbel",
+        ref: "jenisbimbel",
     },
 
     createdAt: {

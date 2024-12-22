@@ -19,7 +19,7 @@ const guruSchema = new mongoose.Schema({
     
     jenisbimbel: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "jenis bimbel",
+        ref: "jenisbimbel",
     },
 
     createdAt: {
