@@ -1,7 +1,10 @@
 const Guru = require("../models/guru");
 const getAllGuru = async (req, res) => {
     try {
-        const guru = await Guru.find();
+        // const guru = await Guru.find();
+        
+        // Mengambil semua prodi dari database dan populate data fakultas berdasarkan fakultas_id
+        const guru = await Guru.find().populate("jenisbimbel_id", "nama"); // Mengambil field 'nama' dari Fakultas
 
         res.status(200).json(guru);
     } catch (err) {
@@ -26,7 +29,7 @@ const createGuru = async (req, res) => {
         nama: req.body.nama,
         alamat: req.body.alamat,
         no_hp: req.body.no_hp,
-        jenisbimbel: req.body.jenisbimbel,
+        jenisbimbel_id: req.body.jenisbimbel_id,
         
     })
     try {
@@ -54,8 +57,8 @@ const updateGuru = async (req, res) => {
         if (req.body.no_hp != null){
             guru.no_hp = req.body.no_hp;
         }
-        if (req.body.jenisbimbel != null){
-            guru.jenisbimbel = req.body.jenisbimbel;
+        if (req.body.jenisbimbel_id != null){
+            guru.jenisbimbel_id = req.body.jenisbimbel_id;
         }
 
         const updateGuru = await guru.save();
