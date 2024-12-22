@@ -1,7 +1,7 @@
 const Jadwal = require("../models/jadwal");
 const getAllJadwal = async (req, res) => {
     try {
-        const jadwal = await Jadwal.find().populate('kelas').populate('guru');
+        const jadwal = await Jadwal.find().populate('jenisbimbel_id', 'nama singkatan').populate('guru_id', 'nama');
 
         res.status(200).json(jadwal);
     } catch (err) {
@@ -29,9 +29,9 @@ const createJadwal = async (req, res) => {
     const jadwal = new Jadwal({
         hari: req.body.hari,
         jam: req.body.jam,
-        jenisbimbel: req.body.jenisbimbel,
-        ruangKelas:req.body.ruangKelas,
-        guru:req.body.guru
+        jenisbimbel_id: req.body.jenisbimbel_id,
+        ruangkelas:req.body.ruangelas,
+        guru_id:req.body.guru_id
     })
     try {
         const newJadwal = await jadwal.save();
@@ -57,14 +57,14 @@ const updateJadwal = async (req, res) => {
         if (req.body.jam != null){
             jadwal.jam = req.body.jam;
         }
-        if (req.body.jenisbimbel != null){
-            jadwal.jenisbimbel = req.body.jenisbimbel;
+        if (req.body.jenisbimbel_id != null){
+            jadwal.jenisbimbel_id = req.body.jenisbimbel_id;
         }
-        if (req.body.ruangKelas != null){
-            jadwal.ruangKelas = req.body.ruangKelas;
+        if (req.body.ruangkelas != null){
+            jadwal.ruangkelas = req.body.ruangkelas;
         }
-        if (req.body.guru != null){
-            jadwal.guru = req.body.guru;
+        if (req.body.guru_id != null){
+            jadwal.guru_id = req.body.guru_id;
         }
 
         const updateJadwal = await jadwal.save();

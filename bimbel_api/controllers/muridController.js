@@ -1,8 +1,9 @@
 const Murid = require("../models/murid");
 const getAllMurid = async (req, res) => {
     try {
-        const murid = await Murid.find();
-
+        //const murid = await Murid.find();
+        
+        const murid = await Murid.find().populate("jenisbimbel_id", "nama singkatan"); 
         res.status(200).json(murid);
     } catch (err) {
         res.status(500).json({message: err.message});
@@ -29,7 +30,7 @@ const createMurid = async (req, res) => {
         no_hp: req.body.no_hp,
         no_hpOrtu: req.body.no_hpOrtu,
         asal_sekolah: req.body.asal_sekolah,
-        jenisbimbel: req.body.jenisbimbel
+        jenisbimbel_id: req.body.jenisbimbel_id
     })
     try {
         const newMurid = await murid.save();
@@ -50,21 +51,23 @@ const updateMurid = async (req, res) => {
         if (req.body.nama != null){
             murid.nama = req.body.nama;
         }
-
-        if (req.body.email != null){
-            murid.email = req.body.email;
+        if (req.body.alamat != null){
+            murid.alamat = req.body.alamat;
+        }
+        if (req.body.kelas != null){
+            murid.tglLahir = req.body.tglLahir;
         }
         if (req.body.no_hp != null){
             murid.no_hp = req.body.no_hp;
         }
-        if (req.body.alamat != null){
-            murid.alamat = req.body.alamat;
+        if (req.body.no_hpOrtu != null){
+            murid.no_hpOrtu = req.body.no_hpOrtu;
         }
-        if (req.body.tglLahir != null){
-            murid.tglLahir = req.body.tglLahir;
+        if (req.body.asal_sekolah != null){
+            murid.asal_sekolah = req.body.asal_sekolah;
         }
-        if (req.body.kelas != null){
-            murid.kelas = req.body.kelas;
+        if (req.body.jenisbimbel_id != null){
+            murid.jenisbimbel_id = req.body.jenisbimbel_id;
         }
 
         const updateMurid = await murid.save();
