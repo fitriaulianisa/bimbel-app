@@ -30,7 +30,7 @@ const createJadwal = async (req, res) => {
         hari: req.body.hari,
         jam: req.body.jam,
         jenisbimbel_id: req.body.jenisbimbel_id,
-        ruangkelas:req.body.ruangelas,
+        ruangkelas:req.body.ruangkelas,
         guru_id:req.body.guru_id
     })
     try {
