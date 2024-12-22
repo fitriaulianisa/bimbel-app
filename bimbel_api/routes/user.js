@@ -5,12 +5,10 @@ const router= express.Router();
 const userController = require("../controllers/userController");
 
 // impor middleware auth dan role
-const authMiddleware = require("../middleware/authMiddleware");
-const roleMiddleware = require("../middleware/roleMiddleware");
-router.get("/", authMiddleware, roleMiddleware("admin"), userController.getAllUser);
-router.post("/", authMiddleware, roleMiddleware('admin'), userController.createUser);
-router.get("/:id", authMiddleware, userController.getUserById);
-router.put("/:id", authMiddleware, roleMiddleware("admin"), userController.updateUser);
-router.delete("/:id", authMiddleware, roleMiddleware("admin"), userController.deleteUser);
+// router.get("/", muridController.getAllMurid);
+router.post("/", userController.createUser);
+router.get("/:id", userController.getUserById);
+router.put("/:id", userController.updateUser);
+router.delete("/:id", userController.deleteUser);
 
 module.exports = router;
