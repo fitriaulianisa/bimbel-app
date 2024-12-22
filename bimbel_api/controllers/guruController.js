@@ -4,7 +4,7 @@ const getAllGuru = async (req, res) => {
         // const guru = await Guru.find();
         
         // Mengambil semua prodi dari database dan populate data fakultas berdasarkan fakultas_id
-        const guru = await Guru.find().populate("jenisbimbel_id", "nama"); // Mengambil field 'nama' dari Fakultas
+        const guru = await Guru.find().populate("jenisbimbel_id", "nama singkatan"); // Mengambil field 'nama' dari Fakultas
 
         res.status(200).json(guru);
     } catch (err) {
