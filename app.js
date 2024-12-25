@@ -19,7 +19,7 @@ const jadwalRouterApi = require('./bimbel_api/routes/jadwal');
 const userRouterApi = require('./bimbel_api/routes/user');
 const muridRouterApi = require('./bimbel_api/routes/murid');
 const guruRouterApi = require('./bimbel_api/routes/guru');
-
+const materiRouterApi = require ('./bimbel_api/routes/materi')
 const authRouterApi = require("./bimbel_api/routes/auth");
 
 require("dotenv").config();
@@ -43,7 +43,7 @@ app.use('/api/jadwal', jadwalRouterApi);
 app.use('/api/user', userRouterApi);
 app.use('/api/murid', muridRouterApi);
 app.use('/api/guru', guruRouterApi);
-
+app.use('/api/materi', materiRouterApi);
 app.use('/api/auth', authRouterApi);
 
 // Catch 404 and forward to error handler
