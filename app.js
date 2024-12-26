@@ -43,6 +43,7 @@ app.use('/api/jadwal', jadwalRouterApi);
 app.use('/api/user', userRouterApi);
 app.use('/api/murid', muridRouterApi);
 app.use('/api/guru', guruRouterApi);
+// materi
 app.use('/api/materi', materiRouterApi);
 app.use('/api/auth', authRouterApi);
 
