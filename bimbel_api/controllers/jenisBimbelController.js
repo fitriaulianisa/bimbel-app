@@ -48,7 +48,7 @@ const updateJenisBimbel = async (req, res) => {
         }
 
         if (req.body.singkatan != null){
-            jenisbimbel.singkatan = req.body.jenisbimbel;
+            jenisbimbel.singkatan = req.body.singkatan;
         }
         if (req.body.harga != null){
             jenisbimbel.harga = req.body.harga;
