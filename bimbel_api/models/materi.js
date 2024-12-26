@@ -22,11 +22,16 @@ const materiSchema = new mongoose.Schema({
         required: true,
     },
 
-    createdAt: {
-        type: Date,
-        default: Date.now,
+    
+    foto: {
+        type: String,
+        required: false,
     },
-});
+    
+},
+{ timestamps: true }
+);
+
 
 const Materi = mongoose.model("Materi", materiSchema);
 

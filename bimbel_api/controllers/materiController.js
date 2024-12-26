@@ -1,91 +1,110 @@
+// Mengimpor model Mahasiswa dan Prodi, serta modul path dan fs untuk pengelolaan file
 const Materi = require("../models/materi");
-const getAllMateri = async (req, res) => {
-    try {
-        //const murid = await Murid.find();
-        
-        const materi = await Materi.find().populate("jenisbimbel_id", "nama singkatan"); 
-        res.status(200).json(materi);
-    } catch (err) {
-        res.status(500).json({message: err.message});
-    }
-};
+const JenisBimbel = require("../models/jenisBimbel");
+const path = require("path");
+const fs = require("fs");
 
-const getMateriById = async (req, res) => {
-    try {
-        const materi = await Materi.findById(req.params.id);
-        if (!materi)
-            return res.status(404).json({message: "Materi not found"});
+// Fungsi untuk menambahkan data mahasiswa baru
+exports.createMateri = async (req, res) => {
+  const {  namamateri, deskripsi, kelas, jenisbimbel_id } = req.body; // Destrukturisasi data dari body request
 
-        res.status(200).json(materi);
-    } catch (err) {
-        res.status(500).json({message: err.message});
-    }
-};
+  if (!req.file) {
+    // Validasi jika file foto tidak ada
+    return res.status(400).json({ message: "File foto is required" });
+  }
 
-const createMateri = async (req, res) => {
+  try {
+    const jenisbimbel = await JenisBimbel.findById(jenisbimbel_id); // Mencari Prodi berdasarkan ID
+    if (!jenisbimbel) return res.status(404).json({ message: "Jenis Bimbel not found" }); // Jika Prodi tidak ditemukan
+
+    // Membuat instance Mahasiswa baru
     const materi = new Materi({
-        namamateri: req.body.namamateri,
-        kelas: req.body.kelas,
-        deskripsi: req.body.deskripsi,
-        jenisbimbel_id: req.body.jenisbimbel_id
-    })
-    try {
-        const newMateri = await materi.save();
+      
+      namamateri,
+      deskripsi,
+      kelas,
+      jenisbimbel_id,
+      foto: req.file ? req.file.path : null, // Simpan path file jika ada
+    });
 
-        res.status(200).json(newMateri);
-    } catch (err) {
-        res.status(400).json({message: err.message});
+    await materi.save(); // Menyimpan data mahasiswa ke database
+    res.status(201).json(materi); // Mengembalikan respon sukses
+  } catch (error) {
+    res.status(500).json({ message: error.message }); // Menangani error
+  }
+};
+
+// Fungsi untuk mendapatkan semua data mahasiswa
+exports.getAllMateri = async (req, res) => {
+  try {
+    const materi = await Materi.find().populate("jenisbimbel_id", "nama"); // Mengambil data mahasiswa dan relasi Prodi
+    res.json(materi); // Mengembalikan data mahasiswa
+  } catch (error) {
+    res.status(500).json({ message: error.message }); // Menangani error
+  }
+};
+
+// Fungsi untuk mendapatkan data mahasiswa berdasarkan ID
+exports.getMateriById = async (req, res) => {
+  try {
+    const materi = await Materi.findById(req.params.id).populate(
+      "jenisbimbel_id",
+      "nama"
+    ); // Mengambil data mahasiswa berdasarkan ID dan relasi Prodi
+    if (!materi)
+      return res.status(404).json({ message: "Materi not found" }); // Jika mahasiswa tidak ditemukan
+    res.json(materi); // Mengembalikan data mahasiswa
+  } catch (error) {
+    res.status(500).json({ message: error.message }); // Menangani error
+  }
+};
+
+// Fungsi untuk memperbarui data mahasiswa
+exports.updateMateri = async (req, res) => {
+  const { namamateri, deskripsi, kelas, jenisbimbel_id, foto } = req.body; // Destrukturisasi data dari body request
+
+  try {
+    const materi = await Materi.findById(req.params.id); // Mencari mahasiswa berdasarkan ID
+    if (!materi)
+      return res.status(404).json({ message: "Materi not found" }); // Jika mahasiswa tidak ditemukan
+
+    if (req.file) {
+      // Jika ada file foto baru
+      if (materi.foto) {
+        // Hapus foto lama jika ada
+        fs.unlinkSync(path.join(__dirname, "../", materi.foto));
+      }
+      materi.foto = req.file.path; // Simpan path file baru
     }
+
+    // Perbarui field mahasiswa
+    
+    materi.namamateri = namamateri ?? materi.namamateri;
+    materi.deskripsi = deskripsi ?? materi.deskripsi;
+    materi.kelas = kelas ?? materi.kelas;
+    materi.jenisbimbel_id = jenisbimbel_id ?? materi.jenisbimbel_id;
+
+    await materi.save(); // Menyimpan data mahasiswa yang diperbarui ke database
+    res.json(materi); // Mengembalikan data mahasiswa yang diperbarui
+  } catch (error) {
+    res.status(500).json({ message: error.message }); // Menangani error
+  }
 };
 
-const updateMateri = async (req, res) => {
-    try {
-        const materi = await Materi.findById(req.params.id);
+// Fungsi untuk menghapus data mahasiswa
+exports.deleteMateri = async (req, res) => {
+  try {
+    const materi = await Materi.findByIdAndDelete(req.params.id); // Menghapus mahasiswa berdasarkan ID
+    if (!materi)
+      return res.status(404).json({ message: "Materi not found" }); // Jika mahasiswa tidak ditemukan
 
-        if (!materi)
-            return res.status(404).json({ message: "Materi not found" });
-
-        if (req.body.namamateri != null){
-            murid.namamateri = req.body.namamateri;
-        }
-        if (req.body.deskripsi != null){
-            murid.deskripsi = req.body.deskripsi;
-        }
-        if (req.body.kelas != null){
-            murid.tglLahir = req.body.tglLahir;
-        }
-       
-        if (req.body.jenisbimbel_id != null){
-            murid.jenisbimbel_id = req.body.jenisbimbel_id;
-        }
-
-        const updateMateri = await materi.save();
-
-        res.status(200).json(updateMateri);
-    } catch (err) {
-        res.status(400).json({message: err.message});
+    if (materi.foto) {
+      // Jika ada file foto, hapus file tersebut
+      fs.unlinkSync(path.join(__dirname, "../", materi.foto));
     }
+
+    res.json({ message: "Materi deleted successfully" }); // Mengembalikan respon sukses
+  } catch (error) {
+    res.status(500).json({ message: error.message }); // Menangani error
+  }
 };
-
-const deleteMateri = async (req, res) => {
-    try {
-        const materi = await Materi.findById(req.params.id);
-
-        if (!materi)
-            return res.status(404).json({ message: "Materi not found" });
-
-        await materi.deleteOne();
-        res.status(200).json({message: "Materi deleted"});
-    } catch (err) {
-        res.status(500).json({message: err.message});
-    }
-};
-
-module.exports = {
-    getAllMateri,
-    createMateri,
-    getMateriById,
-    updateMateri,
-    deleteMateri,
-};
-

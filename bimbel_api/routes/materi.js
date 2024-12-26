@@ -3,6 +3,7 @@ const express = require("express");
 const router= express.Router();
 
 const materiController = require("../controllers/materiController");
+const upload = require ("../middleware/uploadMiddleware");
 
 // impor middleware auth dan role
 // const authMiddleware = require("../middleware/authMiddleware");
@@ -16,8 +17,8 @@ const materiController = require("../controllers/materiController");
 
 
 router.get("/", materiController.getAllMateri);
-router.post("/", materiController.createMateri);
+router.post("/", upload.single("foto"), materiController.createMateri);
 router.get("/:id", materiController.getMateriById);
-router.put("/:id", materiController.updateMateri);
-router.delete("/:id", materiController.deleteMateri);
+router.put("/:id", upload.single("foto"), materiController.updateMateri);
+router.delete("/:id",  materiController.deleteMateri);
 module.exports = router;
