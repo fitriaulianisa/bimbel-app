@@ -55,7 +55,7 @@ const updateMurid = async (req, res) => {
             murid.alamat = req.body.alamat;
         }
         if (req.body.kelas != null){
-            murid.tglLahir = req.body.tglLahir;
+            murid.kelas = req.body.kelas;
         }
         if (req.body.no_hp != null){
             murid.no_hp = req.body.no_hp;
