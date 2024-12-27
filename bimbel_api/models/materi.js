@@ -11,10 +11,8 @@ const materiSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    kelas_id:{
-
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Murid",
+    kelas:{
+        type: String,
         trim: true,
     },
     
