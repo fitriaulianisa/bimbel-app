@@ -9,7 +9,7 @@ const materiController = require("../controllers/materiController");
 const authMiddleware = require("../middleware/authMiddleware");
 const roleMiddleware = require("../middleware/roleMiddleware");
 
-router.get("/", authMiddleware, roleMiddleware("admin"), materiController.getAllMateri);
+router.get("/",  materiController.getAllMateri);
 router.post("/", authMiddleware, roleMiddleware('admin'), materiController.createMateri);
 router.get("/:id", authMiddleware, materiController.getMateriById);
 router.put("/:id", authMiddleware, roleMiddleware("admin"), materiController.updateMateri);
