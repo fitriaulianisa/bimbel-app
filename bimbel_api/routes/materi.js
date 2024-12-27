@@ -6,19 +6,19 @@ const materiController = require("../controllers/materiController");
 const upload = require ("../middleware/uploadMiddleware");
 
 // impor middleware auth dan role
-// const authMiddleware = require("../middleware/authMiddleware");
-// const roleMiddleware = require("../middleware/roleMiddleware");
+const authMiddleware = require("../middleware/authMiddleware");
+const roleMiddleware = require("../middleware/roleMiddleware");
 
-// router.get("/", authMiddleware, roleMiddleware("admin"), muridController.getAllMurid);
-// router.post("/", authMiddleware, roleMiddleware('admin'), muridController.createMurid);
-// router.get("/:id", authMiddleware, muridController.getMuridById);
-// router.put("/:id", authMiddleware, roleMiddleware("admin"), muridController.updateMurid);
-// router.delete("/:id", authMiddleware, roleMiddleware("admin"),muridController.deleteMurid);
+router.get("/", authMiddleware, roleMiddleware("admin"), materiController.getAllMateri);
+router.post("/", authMiddleware, roleMiddleware('admin'), materiController.createMateri);
+router.get("/:id", authMiddleware, materiController.getMateriById);
+router.put("/:id", authMiddleware, roleMiddleware("admin"), materiController.updateMateri);
+router.delete("/:id", authMiddleware, roleMiddleware("admin"),materiController.deleteMateri);
 
 
-router.get("/", materiController.getAllMateri);
-router.post("/", upload.single("linkurl"), materiController.createMateri);
-router.get("/:id", materiController.getMateriById);
-router.put("/:id", upload.single("linkurl"), materiController.updateMateri);
-router.delete("/:id",  materiController.deleteMateri);
+// router.get("/", materiController.getAllMateri);
+// router.post("/", upload.single("linkurl"), materiController.createMateri);
+// router.get("/:id", materiController.getMateriById);
+// router.put("/:id", upload.single("linkurl"), materiController.updateMateri);
+// router.delete("/:id",  materiController.deleteMateri);
 module.exports = router;
