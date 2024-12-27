@@ -23,7 +23,7 @@ const materiSchema = new mongoose.Schema({
     },
 
     
-    foto: {
+    linkurl: {
         type: String,
         required: false,
     },

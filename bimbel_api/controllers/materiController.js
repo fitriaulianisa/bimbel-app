@@ -1,4 +1,4 @@
-// Mengimpor model Mahasiswa dan Prodi, serta modul path dan fs untuk pengelolaan file
+// Mengimpor model Mahasiswa dan Prodi, serta modul path dan fs untuk pengelolaan linkurl
 const Materi = require("../models/materi");
 const JenisBimbel = require("../models/jenisBimbel");
 const path = require("path");
@@ -8,9 +8,9 @@ const fs = require("fs");
 exports.createMateri = async (req, res) => {
   const {  namamateri, deskripsi, kelas, jenisbimbel_id } = req.body; // Destrukturisasi data dari body request
 
-  if (!req.file) {
-    // Validasi jika file foto tidak ada
-    return res.status(400).json({ message: "File foto is required" });
+  if (!req.linkurl) {
+    // Validasi jika linkurl linkurl tidak ada
+    return res.status(400).json({ message: "linkurl linkurl is required" });
   }
 
   try {
@@ -24,7 +24,7 @@ exports.createMateri = async (req, res) => {
       deskripsi,
       kelas,
       jenisbimbel_id,
-      foto: req.file ? req.file.path : null, // Simpan path file jika ada
+      linkurl: req.linkurl ? req.linkurl.path : null, // Simpan path linkurl jika ada
     });
 
     await materi.save(); // Menyimpan data mahasiswa ke database
@@ -61,20 +61,20 @@ exports.getMateriById = async (req, res) => {
 
 // Fungsi untuk memperbarui data mahasiswa
 exports.updateMateri = async (req, res) => {
-  const { namamateri, deskripsi, kelas, jenisbimbel_id, foto } = req.body; // Destrukturisasi data dari body request
+  const { namamateri, deskripsi, kelas, jenisbimbel_id, linkurl } = req.body; // Destrukturisasi data dari body request
 
   try {
     const materi = await Materi.findById(req.params.id); // Mencari mahasiswa berdasarkan ID
     if (!materi)
       return res.status(404).json({ message: "Materi not found" }); // Jika mahasiswa tidak ditemukan
 
-    if (req.file) {
-      // Jika ada file foto baru
-      if (materi.foto) {
-        // Hapus foto lama jika ada
-        fs.unlinkSync(path.join(__dirname, "../", materi.foto));
+    if (req.linkurl) {
+      // Jika ada linkurl linkurl baru
+      if (materi.linkurl) {
+        // Hapus linkurl lama jika ada
+        fs.unlinkSync(path.join(__dirname, "../", materi.linkurl));
       }
-      materi.foto = req.file.path; // Simpan path file baru
+      materi.linkurl = req.linkurl.path; // Simpan path linkurl baru
     }
 
     // Perbarui field mahasiswa
@@ -98,9 +98,9 @@ exports.deleteMateri = async (req, res) => {
     if (!materi)
       return res.status(404).json({ message: "Materi not found" }); // Jika mahasiswa tidak ditemukan
 
-    if (materi.foto) {
-      // Jika ada file foto, hapus file tersebut
-      fs.unlinkSync(path.join(__dirname, "../", materi.foto));
+    if (materi.linkurl) {
+      // Jika ada linkurl linkurl, hapus linkurl tersebut
+      fs.unlinkSync(path.join(__dirname, "../", materi.linkurl));
     }
 
     res.json({ message: "Materi deleted successfully" }); // Mengembalikan respon sukses

@@ -17,8 +17,8 @@ const upload = require ("../middleware/uploadMiddleware");
 
 
 router.get("/", materiController.getAllMateri);
-router.post("/", upload.single("foto"), materiController.createMateri);
+router.post("/", upload.single("linkurl"), materiController.createMateri);
 router.get("/:id", materiController.getMateriById);
-router.put("/:id", upload.single("foto"), materiController.updateMateri);
+router.put("/:id", upload.single("linkurl"), materiController.updateMateri);
 router.delete("/:id",  materiController.deleteMateri);
 module.exports = router;
