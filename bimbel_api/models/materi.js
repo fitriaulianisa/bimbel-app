@@ -1,35 +1,38 @@
-const mongoose = require('mongoose');
-
-const MateriSchema = new mongoose.Schema(
-  {
+const mongoose = require("mongoose");
+const materiSchema = new mongoose.Schema({
     namamateri: {
-      type: String,
-      required: true,
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
     },
-    deskripsi: {
-      type: String,
+    deskripsi:{
+        type: String,
+        required: true,
+        trim: true,
     },
-    kelas: {
-      type: String,
-      required: true,
+    kelas:{
+        type: String,
+        trim: true,
     },
+    
     jenisbimbel_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'JenisBimbel',
-      required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "JenisBimbel",
+        required: true,
     },
-    linkurl: {
-      type: String,
-      required: true,
-      validate: {
-        validator: function (v) {
-          return /^https?:\/\/.+$/.test(v); // Validasi URL
-        },
-        message: (props) => `${props.value} bukan URL yang valid!`, // Perbaikan pada penggunaan string template
-      },
+
+    
+    filemateri: {
+        type: String,
+        required: false,
     },
-  },
-  { timestamps: true } // Menambahkan createdAt dan updatedAt otomatis
+    
+},
+{ timestamps: true }
 );
 
-module.exports = mongoose.model('Materi', MateriSchema);
+
+const Materi = mongoose.model("Materi", materiSchema);
+
+module.exports = Materi;
