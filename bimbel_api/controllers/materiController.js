@@ -61,33 +61,35 @@ exports.getMateriById = async (req, res) => {
 
 // Fungsi untuk memperbarui data mahasiswa
 exports.updateMateri = async (req, res) => {
-  const { namamateri, deskripsi, kelas, jenisbimbel_id, filemateri } = req.file; // Destrukturisasi data dari body request
+  const { namamateri, deskripsi, kelas, jenisbimbel_id } = req.body;
 
   try {
-    const materi = await Materi.findById(req.params.id); // Mencari mahasiswa berdasarkan ID
-    if (!materi)
-      return res.status(404).json({ message: "Materi not found" }); // Jika mahasiswa tidak ditemukan
+    const materi = await Materi.findById(req.params.id);
+    if (!materi) return res.status(404).json({ message: "Materi not found" });
 
     if (req.file) {
-      // Jika ada file foto baru
+      // Hapus file lama jika ada
       if (materi.filemateri) {
-        // Hapus foto lama jika ada
-        fs.unlinkSync(path.join(__dirname, "../", materi.filemateri));
+        const oldPath = path.join(__dirname, "../", materi.filemateri);
+        fs.unlink(oldPath, (err) => {
+          if (err) console.error("Error deleting old file:", err);
+        });
       }
-      materi.filemateri = req.file.path; // Simpan path file baru
+      materi.filemateri = req.file.path; // Assign file baru
     }
 
-    // Perbarui field mahasiswa
-    
+    // Perbarui field materi
     materi.namamateri = namamateri ?? materi.namamateri;
     materi.deskripsi = deskripsi ?? materi.deskripsi;
     materi.kelas = kelas ?? materi.kelas;
     materi.jenisbimbel_id = jenisbimbel_id ?? materi.jenisbimbel_id;
-    materi.filemateri = filemateri ?? materi.filemateri;
-    await materi.save(); // Menyimpan data mahasiswa yang diperbarui ke database
-    res.json(materi); // Mengembalikan data mahasiswa yang diperbarui
+    
+
+    await materi.save();
+    res.json(materi);
   } catch (error) {
-    res.status(500).json({ message: error.message }); // Menangani error
+    console.error("Update error:", error);
+    res.status(500).json({ message: error.message });
   }
 };
 
