@@ -10,7 +10,7 @@ const authMiddleware = require("../middleware/authMiddleware");
 const roleMiddleware = require("../middleware/roleMiddleware");
 
 router.get("/",  materiController.getAllMateri);
-router.post("/", authMiddleware, roleMiddleware('admin'), upload.single("filemateri"), materiController.createMateri);
+router.post("/upload", authMiddleware, roleMiddleware('admin'), upload.single("filemateri"), materiController.createMateri);
 router.get("/:id", authMiddleware, materiController.getMateriById);
 router.put("/:id", authMiddleware, roleMiddleware("admin"), upload.single("filemateri"), materiController.updateMateri);
 router.delete("/:id", authMiddleware, roleMiddleware("admin"),materiController.deleteMateri);

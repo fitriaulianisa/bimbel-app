@@ -4,7 +4,18 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
+const dotenv = require('dotenv');
+dotenv.config();
+const cloudinary = require('./bimbel_api/config/cloudinary'); 
+console.log(cloudinary);
+
+// multer
+const multer =require('multer');
+console.log(multer);
 const connectDB = require("./bimbel_api/models/db");
+
+
+
 
 // Koneksi ke database
 connectDB();
@@ -22,7 +33,7 @@ const guruRouterApi = require('./bimbel_api/routes/guru');
 const materiRouterApi = require ('./bimbel_api/routes/materi')
 const authRouterApi = require("./bimbel_api/routes/auth");
 
-require("dotenv").config();
+
 // View engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
