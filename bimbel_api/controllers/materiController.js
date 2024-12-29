@@ -61,7 +61,7 @@ exports.getMateriById = async (req, res) => {
 
 // Fungsi untuk memperbarui data mahasiswa
 exports.updateMateri = async (req, res) => {
-  const { namamateri, deskripsi, kelas, jenisbimbel_id, filemateri } = req.body; // Destrukturisasi data dari body request
+  const { namamateri, deskripsi, kelas, jenisbimbel_id, filemateri } = req.file; // Destrukturisasi data dari body request
 
   try {
     const materi = await Materi.findById(req.params.id); // Mencari mahasiswa berdasarkan ID
