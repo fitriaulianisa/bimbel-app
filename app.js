@@ -11,9 +11,9 @@ require("dotenv").config(); // Load environment variables
 // const cloudinary = require('./bimbel_api/config/cloudinary'); 
 // console.log(cloudinary);
 
-// // multer
-// const multer =require('multer');
-// console.log(multer);
+// multer
+const multer =require('multer');
+console.log(multer);
 const connectDB = require("./bimbel_api/models/db");
 
 
