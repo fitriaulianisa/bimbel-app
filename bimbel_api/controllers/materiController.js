@@ -127,8 +127,8 @@
 const Materi = require("../models/materi");
 const JenisBimbel = require("../models/jenisBimbel");
 const cloudinary = require("../config/cloudinary"); // Pastikan ini adalah path yang benar
-const path = require("path");
-const fs = require("fs");
+// const path = require("path");
+// const fs = require("fs");
 
 // Fungsi untuk menambahkan materi baru
 exports.createMateri = async (req, res) => {
