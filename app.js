@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 require("dotenv").config(); // Load environment variables
+const fileUpload = require ('express-fileupload');
 
 // const dotenv = require('dotenv');
 //dotenv.config();
@@ -59,7 +60,7 @@ app.use('/api/guru', guruRouterApi);
 // materi
 app.use('/api/materi', materiRouterApi);
 app.use('/api/auth', authRouterApi);
-
+app.use(fileUpload({ useTempFiles: true}));
 // Catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
