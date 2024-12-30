@@ -1,7 +1,9 @@
 const Materi = require("../models/materi");
 const JenisBimbel = require("../models/jenisBimbel");
-const cloudinary = require("cloudinary").v2;
+// const cloudinary = require("cloudinary").v2;
 
+const path = require("path");
+const fs = require("fs");
 // Fungsi untuk menambahkan materi baru
 exports.createMateri = async (req, res) => {
   const { namamateri, deskripsi, kelas, jenisbimbel_id } = req.body;
@@ -16,16 +18,17 @@ exports.createMateri = async (req, res) => {
       return res.status(404).json({ message: "Jenis Bimbel not found" });
     }
 
-    const fileUpload = await cloudinary.uploader.upload(req.file.path, {
-      folder: "materi_bimbel",
-    });
+    // const fileUpload = await cloudinary.uploader.upload(req.file.path, {
+    //   folder: "materi_bimbel",
+    // });
 
     const materi = new Materi({
       namamateri,
       deskripsi,
       kelas,
       jenisbimbel_id,
-      filemateri: fileUpload.secure_url,
+      filemateri: req.file ? req.file.path : null,
+      // filemateri: fileUpload.secure_url,
     });
 
     await materi.save();
@@ -72,11 +75,19 @@ exports.updateMateri = async (req, res) => {
     }
 
     if (req.file) {
-      const fileUpload = await cloudinary.uploader.upload(req.file.path, {
-        folder: "materi_bimbel",
-      });
-      materi.filemateri = fileUpload.secure_url;
+      // jika ada file baru
+      if (materi.file) {
+        // hapus file lama jika ada
+        fs.unlinkSync(path.join(__dirname, "../", materi.foto));
+      }
+      materi.foto = req.file.path; // Simpan path file baru
     }
+    // if (req.file) {
+    //   const fileUpload = await cloudinary.uploader.upload(req.file.path, {
+    //     folder: "materi_bimbel",
+    //   });
+    //   materi.filemateri = fileUpload.secure_url;
+    // }
 
     materi.namamateri = namamateri ?? materi.namamateri;
     materi.deskripsi = deskripsi ?? materi.deskripsi;
@@ -99,9 +110,13 @@ exports.deleteMateri = async (req, res) => {
     }
 
     if (materi.filemateri) {
-      const filePublicId = materi.filemateri.split("/").pop().split(".")[0];
-      await cloudinary.uploader.destroy(filePublicId);
+      // Jika ada file foto, hapus file tersebut
+      fs.unlinkSync(path.join(__dirname, "../", materi.filemateri));
     }
+    // if (materi.filemateri) {
+    //   const filePublicId = materi.filemateri.split("/").pop().split(".")[0];
+    //   await cloudinary.uploader.destroy(filePublicId);
+    // }
 
     res.json({ message: "Materi deleted successfully" });
   } catch (error) {

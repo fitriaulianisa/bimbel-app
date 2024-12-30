@@ -4,14 +4,16 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
-const dotenv = require('dotenv');
-dotenv.config();
-const cloudinary = require('./bimbel_api/config/cloudinary'); 
-console.log(cloudinary);
+require("dotenv").config(); // Load environment variables
 
-// multer
-const multer =require('multer');
-console.log(multer);
+// const dotenv = require('dotenv');
+//dotenv.config();
+// const cloudinary = require('./bimbel_api/config/cloudinary'); 
+// console.log(cloudinary);
+
+// // multer
+// const multer =require('multer');
+// console.log(multer);
 const connectDB = require("./bimbel_api/models/db");
 
 
