@@ -42,39 +42,24 @@
 // // Mengekspor konfigurasi multer agar dapat digunakan di file lain
 // module.exports = upload;
 
-const multer = require("multer"); // Mengimpor multer
-const { CloudinaryStorage } = require("multer-storage-cloudinary"); // Penyimpanan di Cloudinary
-const cloudinary = require('../config/cloudinary'); // Konfigurasi Cloudinary
+const multer = require("multer");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("../config/cloudinary");
 
-// Konfigurasi penyimpanan file dengan CloudinaryStorage
 const storage = new CloudinaryStorage({
-  cloudinary: cloudinary, // Objek Cloudinary dari konfigurasi
+  cloudinary: cloudinary,
   params: {
-    folder: "uploads", // Folder di Cloudinary
-    allowed_formats: ["jpeg", "jpg", "png", "gif", "docx", "doc", "ppt", "pptx", "pdf"], // Format file yang diizinkan
+    folder: "materi_bimbel",
+    allowed_formats: ["jpeg", "jpg", "png", "gif", "docx", "doc", "ppt", "pptx", "pdf"],
   },
 });
 
-// Filter file untuk membatasi jenis file yang dapat diunggah
 const fileFilter = (req, file, cb) => {
-  const allowedTypes = /jpeg|jpg|png|gif|docx|doc|ppt|pptx|pdf/; // Tipe file yang diizinkan
-  const extname = allowedTypes.test(file.originalname.toLowerCase()); // Mengecek ekstensi file
-  const mimetype = allowedTypes.test(file.mimetype); // Mengecek MIME type file
-
-  if (extname && mimetype) {
-    cb(null, true); // Jika valid, lanjutkan proses upload
-  } else {
-    cb(new Error("File type not allowed. Only images and documents are permitted."), false); // Jika tidak valid
-  }
+  const allowedTypes = /jpeg|jpg|png|gif|docx|doc|ppt|pptx|pdf/;
+  const isAllowed = allowedTypes.test(file.mimetype);
+  isAllowed ? cb(null, true) : cb(new Error("Invalid file type"), false);
 };
 
-// Konfigurasi multer
-const upload = multer({
-  storage, // Menggunakan CloudinaryStorage
-  limits: { fileSize: 100 * 1024 * 1024 }, // Membatasi ukuran file maksimum menjadi 100MB
-  fileFilter, // Menggunakan filter file
-});
+const upload = multer({ storage, fileFilter });
 
-// Mengekspor konfigurasi multer agar dapat digunakan di file lain
 module.exports = upload;
-
