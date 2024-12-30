@@ -51,13 +51,13 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary, // Objek Cloudinary dari konfigurasi
   params: {
     folder: "uploads", // Folder di Cloudinary
-    allowed_formats: ["jpeg", "jpg", "png", "gif", "docx", "doc", "ppt", "pptx"], // Format file yang diizinkan
+    allowed_formats: ["jpeg", "jpg", "png", "gif", "docx", "doc", "ppt", "pptx", "pdf"], // Format file yang diizinkan
   },
 });
 
 // Filter file untuk membatasi jenis file yang dapat diunggah
 const fileFilter = (req, file, cb) => {
-  const allowedTypes = /jpeg|jpg|png|gif|docx|doc|ppt|pptx/; // Tipe file yang diizinkan
+  const allowedTypes = /jpeg|jpg|png|gif|docx|doc|ppt|pptx|pdf/; // Tipe file yang diizinkan
   const extname = allowedTypes.test(file.originalname.toLowerCase()); // Mengecek ekstensi file
   const mimetype = allowedTypes.test(file.mimetype); // Mengecek MIME type file
 
