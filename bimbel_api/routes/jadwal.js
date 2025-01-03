@@ -12,9 +12,6 @@ router.post("/", authMiddleware, roleMiddleware('admin'), jadwalController.creat
 router.get("/:id", authMiddleware, roleMiddleware('admin','user'), jadwalController.getJadwalById);
 router.put("/:id", authMiddleware, roleMiddleware("admin"), jadwalController.updateJadwal);
 router.delete("/:id", authMiddleware, roleMiddleware("admin"),jadwalController.deleteJadwal);
-router.post('/api/jadwal', checkAdminRole, (req, res) => {
-    
-})
 
 // router.get("/", jadwalController.getAllJadwal);
 // router.post("/", jadwalController.createJadwal);
