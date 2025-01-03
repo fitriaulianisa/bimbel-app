@@ -9,9 +9,9 @@ const upload = require ("../middleware/uploadMiddleware");
 const authMiddleware = require("../middleware/authMiddleware");
 const roleMiddleware = require("../middleware/roleMiddleware");
 
-router.get("/",  authMiddleware, roleMiddleware('admin'), materiController.getAllMateri);
+router.get("/",  authMiddleware, roleMiddleware('admin', "user"), materiController.getAllMateri);
 router.post("/", authMiddleware, roleMiddleware('admin'),  materiController.createMateri);
-router.get("/:id", authMiddleware, materiController.getMateriById);
+router.get("/:id", authMiddleware, roleMiddleware('admin', 'user'), materiController.getMateriById);
 router.put("/:id", authMiddleware, roleMiddleware("admin"), materiController.updateMateri);
 router.delete("/:id", authMiddleware, roleMiddleware("admin"),materiController.deleteMateri);
 
