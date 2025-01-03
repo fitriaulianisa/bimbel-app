@@ -7,9 +7,9 @@ const fs = require("fs");
 exports.createMateri = async (req, res) => {
   const { namamateri, deskripsi, kelas, jenisbimbel_id } = req.body;
 
-  if (!req.file) {
-    return res.status(400).json({ message: "File materi is required" });
-  }
+  // if (!req.file) {
+  //   return res.status(400).json({ message: "File materi is required" });
+  // }
 
   try {
     const jenisbimbel = await JenisBimbel.findById(jenisbimbel_id);
