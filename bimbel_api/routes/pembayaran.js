@@ -11,7 +11,7 @@ const roleMiddleware = require("../middleware/roleMiddleware");
 router.get("/",  authMiddleware, roleMiddleware('admin', 'user'), pembayaranController.getAllPembayaran);
 router.post("/", authMiddleware, roleMiddleware('user'), pembayaranController.createPembayaran);
 router.get("/:id", authMiddleware, roleMiddleware('admin', 'user'), pembayaranController.getPembayaranById);
-router.put("/:id", authMiddleware, roleMiddleware("admin"), pembayaranController.updatePembayaran);
+router.put("/:id", authMiddleware, roleMiddleware('admin'), pembayaranController.updatePembayaran);
 
 
 

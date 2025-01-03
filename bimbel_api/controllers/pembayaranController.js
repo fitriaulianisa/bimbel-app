@@ -56,10 +56,10 @@ const updatePembayaran = async (req, res) => {
             pembayaran.jml_transaksi = req.body.jml_transaksi;
         }
         if (req.body.no_rek != null){
-            murid.no_rek = req.body.no_rek;
+            pembayaran.no_rek = req.body.no_rek;
         }
         if (req.body.validasi != null){
-            murid.validasi = req.body.validasi;
+            pembayaran.validasi = req.body.validasi;
         }
 
         const updatePembayaran = await pembayaran.save();
