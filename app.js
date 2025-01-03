@@ -33,7 +33,7 @@ const jadwalRouterApi = require('./bimbel_api/routes/jadwal');
 const userRouterApi = require('./bimbel_api/routes/user');
 const muridRouterApi = require('./bimbel_api/routes/murid');
 const guruRouterApi = require('./bimbel_api/routes/guru');
-const materiRouterApi = require ('./bimbel_api/routes/materi')
+const pembayaranRouterApi = require ('./bimbel_api/routes/pembayaran')
 const authRouterApi = require("./bimbel_api/routes/auth");
 
 
@@ -58,7 +58,7 @@ app.use('/api/user', userRouterApi);
 app.use('/api/murid', muridRouterApi);
 app.use('/api/guru', guruRouterApi);
 // materi
-app.use('/api/materi', materiRouterApi);
+app.use('/api/pembayaran', pembayaranRouterApi);
 app.use('/api/auth', authRouterApi);
 app.use(fileUpload({ useTempFiles: true}));
 // Catch 404 and forward to error handler

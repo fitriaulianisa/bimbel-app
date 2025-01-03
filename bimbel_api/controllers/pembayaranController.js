@@ -4,7 +4,7 @@ const getAllPembayaran = async (req, res) => {
         //const murid = await Murid.find();
         
         const pembayaran = await Pembayaran.find(); 
-        res.status(200).json(murid);
+        res.status(200).json(pembayaran);
     } catch (err) {
         res.status(500).json({message: err.message});
     }
