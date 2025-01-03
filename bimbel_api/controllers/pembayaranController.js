@@ -70,25 +70,11 @@ const updatePembayaran = async (req, res) => {
     }
 };
 
-const deletePembayaran = async (req, res) => {
-    try {
-        const pembayaran = await Pembayaran.findById(req.params.id);
-
-        if (!pembayaran)
-            return res.status(404).json({ message: "Pembayaran not found" });
-
-        await pembyaran.deleteOne();
-        res.status(200).json({message: "Pembayran deleted"});
-    } catch (err) {
-        res.status(500).json({message: err.message});
-    }
-};
 
 module.exports = {
     getAllPembayaran,
     createPembayaran,
     getPembayaranById,
-    updatePembayaran,
-    deletePembayaran,
+    updatePembayaran
 };
 
