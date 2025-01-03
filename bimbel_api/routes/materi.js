@@ -3,7 +3,7 @@ const express = require("express");
 const router= express.Router();
 
 const materiController = require("../controllers/materiController");
-// const upload = require ("../middleware/uploadMiddleware");
+const upload = require ("../middleware/uploadMiddleware");
 
 // impor middleware auth dan role
 const authMiddleware = require("../middleware/authMiddleware");
