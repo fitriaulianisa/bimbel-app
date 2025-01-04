@@ -11,6 +11,11 @@ const jadwalSchema = new mongoose.Schema({
         required: true,
         
     },
+    kelas: {
+        type: string,
+        required: true,
+    },
+    
     jenisbimbel_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "JenisBimbel",
