@@ -22,8 +22,8 @@ const pembayaranSchema = new mongoose.Schema({
     
     validasi:{
         type: String,
-        enum: ["Y","T"],
-        required: true,
+        default: 'BELUM',
+        required: false,
         
     },
 
