@@ -12,10 +12,10 @@ const jadwalSchema = new mongoose.Schema({
         
     },
     kelas: {
-        type: string,
+        type: String,
         required: true,
     },
-    
+
     jenisbimbel_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "JenisBimbel",
