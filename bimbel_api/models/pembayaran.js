@@ -1,6 +1,13 @@
 const mongoose = require("mongoose");
 const pembayaranSchema = new mongoose.Schema({
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    namaMurid: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+
+    },
     tgl_pembayaran: {
         type: String,
         required: true,
