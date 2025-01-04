@@ -24,6 +24,7 @@ const getPembayaranById = async (req, res) => {
 
 const createPembayaran = async (req, res) => {
     const pembayaran = new Pembayaran({
+        namaMurid: req.body.namaMurid,
         tgl_pembayaran: req.body.tgl_pembayaran,
         pembayaran_bln: req.body.pembayaran_bln,
         jml_transaksi: req.body.jml_transaksi,
@@ -45,7 +46,10 @@ const updatePembayaran = async (req, res) => {
 
         if (!pembayaran)
             return res.status(404).json({ message: "Pembayaran not found" });
-
+        
+        if (req.body.namaMurid != null){
+            pembayaran.namaMurid = req.body.namaMurid;
+        }
         if (req.body.tgl_pembayaran != null){
             pembayaran.tgl_pembayaran = req.body.tgl_pembayaran;
         }
