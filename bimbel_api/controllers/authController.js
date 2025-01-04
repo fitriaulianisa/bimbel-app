@@ -35,7 +35,7 @@ exports.login = async (req, res) => {
     try {
         const user = await User.findOne({ email });
         if (!user) {
-            return re.status(400).json({message: "Invalid email or password"});
+            return res.status(400).json({message: "Invalid email or password"});
         }
         // jika email ditemukan
         // bandingkan password yang dikirim
