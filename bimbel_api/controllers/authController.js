@@ -50,7 +50,7 @@ exports.login = async (req, res) => {
             expiresIn: "1h" // masa berlaku token 1 jam
         });
 
-        res.json({ token }) // kirim token sebagai response
+        res.json({ token, role: user.role }) // kirim token sebagai response
   
     }   catch (error){
         res.status(500).json({ message: error.message});
