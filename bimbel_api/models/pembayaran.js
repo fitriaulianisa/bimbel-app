@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const pembayaranSchema = new mongoose.Schema({
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
     namaMurid: {
         type: String,
         required: true,
