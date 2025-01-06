@@ -165,6 +165,10 @@ const updatePembayaran = async (req, res) => {
 };
 const deletePembayaran = async (req, res) => {
     try {
+        // Pastikan pengguna memiliki role admin
+        if (!req.user || req.user.role !== 'admin') {
+            return res.status(403).json({ message: "Access forbidden: Hanya Admin" });
+        }
         const pembayaran = await Pembayaran.findById(req.params.id);
 
         if (!pembayaran)
