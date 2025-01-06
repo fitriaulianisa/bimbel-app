@@ -8,9 +8,9 @@ const muridController = require("../controllers/muridController");
 const authMiddleware = require("../middleware/authMiddleware");
 const roleMiddleware = require("../middleware/roleMiddleware");
 
-router.get("/",  authMiddleware, roleMiddleware('admin', 'user'), muridController.getAllMurid);
+router.get("/",   muridController.getAllMurid);
 router.post("/", authMiddleware, roleMiddleware('admin'), muridController.createMurid);
-router.get("/:id", authMiddleware, roleMiddleware('admin', 'user'), muridController.getMuridById);
+router.get("/:id",  muridController.getMuridById);
 router.put("/:id", authMiddleware, roleMiddleware("admin"), muridController.updateMurid);
 router.delete("/:id", authMiddleware, roleMiddleware("admin"),muridController.deleteMurid);
 
