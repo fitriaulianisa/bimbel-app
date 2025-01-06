@@ -3,7 +3,7 @@ const muridSchema = new mongoose.Schema({
     nama: {
         type: String,
         required: true,
-        unique: true,
+        // unique: true,
         trim: true,
     },
     alamat:{

@@ -4,8 +4,8 @@ const pembayaranSchema = new mongoose.Schema({
     namaMurid: {
         type: String,
         required: true,
-        unique: true,
-        trim: true,
+        // unique: true,
+        trim: true
 
     },
     tgl_pembayaran: {

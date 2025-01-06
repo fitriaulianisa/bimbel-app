@@ -84,7 +84,7 @@ const createPembayaran = async (req, res) => {
 
     try {
         const newPembayaran = await pembayaran.save();
-        res.status(200).json(newPembayaran);
+        res.status(201).json(newPembayaran);
     } catch (err) {
         res.status(400).json({message: err.message});
     }
