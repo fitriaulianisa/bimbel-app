@@ -11,7 +11,7 @@ const pembayaranSchema = new mongoose.Schema({
     tgl_pembayaran: {
         type: String,
         required: true,
-        unique: true,
+        // unique: true,
         trim: true,
     },
     pembayaran_bln:{
