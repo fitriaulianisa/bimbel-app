@@ -12,7 +12,7 @@ router.get("/",  authMiddleware, roleMiddleware('admin', 'user'), pembayaranCont
 router.post("/", authMiddleware, roleMiddleware('user'), pembayaranController.createPembayaran);
 router.get("/:id", authMiddleware, roleMiddleware('admin', 'user'), pembayaranController.getPembayaranById);
 router.put("/:id", authMiddleware, roleMiddleware('admin'), pembayaranController.updatePembayaran);
-
+router.delete("/:id", authMiddleware, roleMiddleware("admin"), pembayaranController.deletePembayaran);
 
 
                 // router.get("/", pembayaranController.getAllPembayaran);
