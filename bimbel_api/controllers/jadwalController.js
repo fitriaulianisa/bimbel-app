@@ -29,6 +29,7 @@ const createJadwal = async (req, res) => {
     const jadwal = new Jadwal({
         hari: req.body.hari,
         jam: req.body.jam,
+        kelas: req.body.kelas,
         jenisbimbel_id: req.body.jenisbimbel_id,
         ruangkelas:req.body.ruangkelas,
         guru_id:req.body.guru_id
@@ -59,6 +60,9 @@ const updateJadwal = async (req, res) => {
         }
         if (req.body.jenisbimbel_id != null){
             jadwal.jenisbimbel_id = req.body.jenisbimbel_id;
+        }
+        if (req.body.kelas != null){
+            jadwal.kelas = req.body.kelas;
         }
         if (req.body.ruangkelas != null){
             jadwal.ruangkelas = req.body.ruangkelas;
