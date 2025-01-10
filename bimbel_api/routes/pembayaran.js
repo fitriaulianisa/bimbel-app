@@ -8,9 +8,9 @@ const pembayaranController = require("../controllers/pembayaranController");
 const authMiddleware = require("../middleware/authMiddleware");
 const roleMiddleware = require("../middleware/roleMiddleware");
 
-router.get("/", pembayaranController.getAllPembayaran);
+router.get("/", authMiddleware, roleMiddleware('admin', 'user'), pembayaranController.getAllPembayaran);
 router.post("/", authMiddleware, roleMiddleware('user'), pembayaranController.createPembayaran);
-router.get("/:id", pembayaranController.getPembayaranById);
+router.get("/:id", authMiddleware, roleMiddleware('admin', 'user'), pembayaranController.getPembayaranById);
 router.put("/:id", authMiddleware, roleMiddleware('admin'), pembayaranController.updatePembayaran);
 router.delete("/:id", authMiddleware, roleMiddleware("admin"), pembayaranController.deletePembayaran);
 

@@ -8,7 +8,7 @@ const roleMiddleware = require("../middleware/roleMiddleware");
 const userController = require("../controllers/userController");
 
 // impor middleware auth dan role
-// router.get("/", muridController.getAllMurid);
+router.get("/", userController.getAllUser);
 router.post("/", userController.createUser);
 router.get("/:id", userController.getUserById);
 router.put("/:id", userController.updateUser);
