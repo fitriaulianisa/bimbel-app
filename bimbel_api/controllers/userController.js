@@ -4,7 +4,8 @@ const getAllUser = async (req, res) => {
         if (req.user.role !== 'admin'){
             return res.status(403).json({ message: 'Access denied. '});
         }
-        const user = await user.find();
+        // const user = await user.find(); //sebelum diperbaiki
+        const user = await User.find(); // setelah diperbaiki
 
         res.status(200).json(user);
     } catch (err) {
@@ -38,7 +39,7 @@ const createUser = async (req, res) => {
         res.status(400).json({message: err.message});
     }
 };
-
+const bcrypt = require("bcrypt");
 const updateUser = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
@@ -47,21 +48,33 @@ const updateUser = async (req, res) => {
             return res.status(404).json({ message: "User not found" });
         }
 
-        if (req.body.email != null){
-            kelas.email = req.body.email;
+        // if (req.body.email != null){     KODINGAN SEBELUM DIPERBAIKI
+        //     kelas.email = req.body.email; 
+        // }
+
+        
+        // if (req.body.password != null){
+        //     kelas.password = req.body.password;
+        // }
+        // if (req.body.role != null){
+        //     kelas.role = req.body.role;
+        // }
+         if (req.body.email != null){            //KODINGAN SETELAH DIPERBAIKI   
+            user.email = req.body.email; // salah memasukkan harusnya user.email bukan kelas.email
         }
 
         
         if (req.body.password != null){
-            kelas.password = req.body.password;
+            const salt = await bcrypt.genSalt(10);
+            user.password = await bcrypt.hash(req.body.password, salt);
         }
         if (req.body.role != null){
-            kelas.role = req.body.role;
+            user.role = req.body.role;
         }
+        // const updatedUser = await User.save() // sebelum diperbaiki
+        const updatedUser = await user.save(); // setelah diperbaiki
 
-        const updatedUser = await User.save();
-
-        res.status(200).json(updatedUser);
+        res.status(200).json({ message: "User Updated Successfullt"});
     } catch (err) {
         res.status(400).json({message: err.message});
     }
