@@ -31,7 +31,7 @@ const createUser = async (req, res) => {
 
     const user = new User({
         email: req.body.email,
-        password: req.body.password,
+        password: hashedPassword,
         role: req.body.role,
     })
     try {
