@@ -12,7 +12,9 @@ exports.register = async (req, res) => {
             return res.status(400).json({ message: "User already exists!"});
         }
         // jika email belum terdaftar
-        user = new User({nama, email, password, role});
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        user = new User({nama, email, password: hashedPassword, role});
         await user.save(); // simpan ke mongoDB
 
         // proses token

@@ -26,6 +26,9 @@ const getUserById = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
     const user = new User({
         email: req.body.email,
         password: req.body.password,
@@ -39,7 +42,7 @@ const createUser = async (req, res) => {
         res.status(400).json({message: err.message});
     }
 };
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const updateUser = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
