@@ -26,8 +26,8 @@ const getUserById = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    // const salt = await bcrypt.genSalt(10);
+    // const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
     const user = new User({
         email: req.body.email,
